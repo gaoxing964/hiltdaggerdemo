@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.mage.hiltdaggerdemo.obj.DataBaseObject
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -12,10 +13,16 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var analyticsAdapter: AnalyticsAdapter
+    lateinit var analyticsService: AnalyticsServiceImpl
 
     @Inject
-    lateinit var analyticsService: AnalyticsService
+    lateinit var analyticsService2: AnalyticsServiceImpl
+
+    @Inject
+    lateinit var dataBaseObject: DataBaseObject
+
+    @Inject
+    lateinit var dataBaseObject2: DataBaseObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +30,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.forwardButton).setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java))
         }
-        Log.i("MainActivityGT", "MainActivityGT $analyticsAdapter")
         Log.i("MainActivityGT", "MainActivityGT $analyticsService")
+        Log.i("MainActivityGT", "MainActivityGT $analyticsService2")
+        Log.i("MainActivityGT", "MainActivityGT $dataBaseObject")
+        Log.i("MainActivityGT", "MainActivityGT $dataBaseObject2")
 //        car.
     }
 }

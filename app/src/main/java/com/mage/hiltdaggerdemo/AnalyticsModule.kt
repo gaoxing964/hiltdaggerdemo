@@ -1,7 +1,9 @@
 package com.mage.hiltdaggerdemo
 
+import com.mage.hiltdaggerdemo.obj.DataBaseObject
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
@@ -18,7 +20,7 @@ interface AnalyticsService {
 
 // Constructor-injected, because Hilt needs to know how to
 // provide instances of AnalyticsServiceImpl, too.
-class AnalyticsServiceImpl @Inject constructor() : AnalyticsService {
+class AnalyticsServiceImpl() : AnalyticsService {
     override fun analyticsMethods() {
 
     }
@@ -26,11 +28,16 @@ class AnalyticsServiceImpl @Inject constructor() : AnalyticsService {
 
 @Module
 @InstallIn(ActivityComponent::class)
-abstract class AnalyticsModule {
+class AnalyticsModule {
 
     @ActivityScoped
-    @Binds
-    abstract fun bindAnalyticsService(
-        analyticsServiceImpl: AnalyticsServiceImpl
-    ): AnalyticsService
+    @Provides
+    fun provideAnalyticsServiceImpl(): AnalyticsServiceImpl {
+        return AnalyticsServiceImpl()
+    }
+
+    @Provides
+    fun provideDataBaseObject(): DataBaseObject {
+        return DataBaseObject()
+    }
 }
