@@ -6,8 +6,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * author  :mayong
@@ -27,10 +29,10 @@ class AnalyticsServiceImpl() : AnalyticsService {
 }
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 class AnalyticsModule {
 
-    @ActivityScoped
+    @Singleton
     @Provides
     fun provideAnalyticsServiceImpl(): AnalyticsServiceImpl {
         return AnalyticsServiceImpl()
